@@ -1,13 +1,12 @@
-package net.test.config;
+package com.kyrakova.diploma.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.test.models.role.Role;
-import net.test.models.role.RoleDao;
-import net.test.models.role.RoleDaoImpl;
-import net.test.models.user.User;
-import net.test.models.user.UserDao;
-import net.test.models.user.UserDaoImpl;
+import com.kyrakova.diploma.models.BaseModel;
+import com.kyrakova.diploma.models.role.Role;
+import com.kyrakova.diploma.models.role.RoleDaoImpl;
+import com.kyrakova.diploma.models.user.User;
+import com.kyrakova.diploma.models.user.UserDaoImpl;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("net.test")
+@ComponentScan("com.kyrakova.diploma")
 @EnableTransactionManagement
 @EnableWebMvc
 public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
@@ -66,6 +64,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     public SessionFactory getSessionFactory(DataSource dataSource) {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
+    	sessionBuilder.addAnnotatedClasses(BaseModel.class);
     	sessionBuilder.addAnnotatedClasses(User.class);
     	sessionBuilder.addAnnotatedClasses(Role.class);
     	return sessionBuilder.buildSessionFactory();
@@ -95,13 +94,13 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     
     @Autowired
     @Bean(name = "userDao")
-    public UserDao getUserDao(SessionFactory sessionFactory) {
+    public UserDaoImpl getUserDao(SessionFactory sessionFactory) {
     	return new UserDaoImpl(sessionFactory);
     }
 
 	@Autowired
 	@Bean(name = "roleDao")
-	public RoleDao getRoleDao(SessionFactory sessionFactory) {
+	public RoleDaoImpl getRoleDao(SessionFactory sessionFactory) {
 		return new RoleDaoImpl(sessionFactory);
 	}
 }

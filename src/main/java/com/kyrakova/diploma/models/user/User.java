@@ -1,14 +1,14 @@
-package net.test.models.user;
+package com.kyrakova.diploma.models.user;
 
-import net.test.models.role.Role;
+import com.kyrakova.diploma.models.BaseModel;
+import com.kyrakova.diploma.models.role.Role;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
-    private long id;
+public class User extends BaseModel implements Serializable {
     private Role role;
     private String login;
     private String password;
@@ -17,14 +17,11 @@ public class User implements Serializable {
     private String address;
 
     @Id
+    @Override
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @ManyToOne

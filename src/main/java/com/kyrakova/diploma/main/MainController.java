@@ -1,11 +1,5 @@
-package net.test.main;
+package com.kyrakova.diploma.main;
 
-import com.google.gson.Gson;
-import net.test.models.role.Role;
-import net.test.models.role.RoleDao;
-import net.test.models.user.User;
-import net.test.models.user.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

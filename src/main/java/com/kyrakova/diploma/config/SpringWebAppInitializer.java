@@ -1,4 +1,4 @@
-package net.test.config;
+package com.kyrakova.diploma.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
