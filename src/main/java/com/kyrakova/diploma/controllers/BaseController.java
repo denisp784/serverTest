@@ -20,8 +20,8 @@ public class BaseController<T extends BaseModel> {
         this.objDao = objDao;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<T> add(@RequestBody T obj) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST, headers = "Accept=application/json")
+    public ResponseEntity<T> add(@RequestBody T obj) throws Exception {
         objDao.saveOrUpdate(obj);
         return new ResponseEntity<T>(obj, HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class BaseController<T extends BaseModel> {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ResponseEntity delete(@PathVariable("id") long id) {
+    public ResponseEntity delete(@PathVariable("id") int id) {
         objDao.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -7,11 +7,10 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public abstract class BaseModel implements Serializable {
-    protected long id;
+    protected int id;
+    public abstract int getId();
 
-    public abstract long getId();
-
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

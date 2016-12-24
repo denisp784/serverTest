@@ -39,7 +39,7 @@ public class BaseDao<T extends BaseModel> {
     }
 
     @Transactional
-    public void delete(long id) {
+    public void delete(int id) {
         T obj = null;
         try {
             obj = typeParameterClass.newInstance();

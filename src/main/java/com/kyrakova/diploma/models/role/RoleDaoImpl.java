@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Denis on 14.11.2016.
- */
 public class RoleDaoImpl extends BaseDao<Role> {
     @Autowired
     private SessionFactory sessionFactory;

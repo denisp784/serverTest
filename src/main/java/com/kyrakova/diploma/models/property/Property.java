@@ -1,14 +1,14 @@
-package com.kyrakova.diploma.models.role;
+package com.kyrakova.diploma.models.property;
 
 import com.kyrakova.diploma.models.BaseModel;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Roles")
-public class Role extends BaseModel implements Serializable {
+@Table(name = "Properties")
+public class Property extends BaseModel implements Serializable {
     private String name;
-    private String options;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +23,5 @@ public class Role extends BaseModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
     }
 }
