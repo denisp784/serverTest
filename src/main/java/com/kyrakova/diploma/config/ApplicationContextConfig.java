@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -38,6 +39,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -89,7 +91,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     private Properties getHibernateProperties() {
     	Properties properties = new Properties();
     	properties.put("hibernate.show_sql", "true");
-    	properties.put("hibernate.hbm2ddl.auto", "create");
+    	properties.put("hibernate.hbm2ddl.auto", "update");
     	properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		properties.put("hibernate.id.new_generator_mappings", "false");
     	return properties;

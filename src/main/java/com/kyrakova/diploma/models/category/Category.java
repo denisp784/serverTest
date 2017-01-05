@@ -28,6 +28,8 @@ public class Category  extends BaseModel implements Serializable {
         this.categoryName = categoryName;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "image")
     public Image getImage() {
         return image;
     }

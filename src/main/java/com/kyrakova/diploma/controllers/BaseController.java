@@ -23,18 +23,10 @@ public class BaseController<T extends BaseModel> {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<T> add(@RequestBody T obj) throws Exception {
+        System.out.println(obj);
         objDao.saveOrUpdate(obj);
         return new ResponseEntity<T>(obj, HttpStatus.OK);
     }
-
-    /*@RequestMapping(value = "/test", method = RequestMethod.POST)
-    public ResponseEntity<String> add(@RequestParam("image") MultipartFile file, @RequestBody T obj) {
-        // objDao.saveOrUpdate(obj);
-        System.out.println(obj);
-        System.out.println(file.getOriginalFilename());
-
-        return new ResponseEntity<String>(file.getOriginalFilename(), HttpStatus.OK);
-    }*/
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseEntity<T> update(@RequestBody T obj) {

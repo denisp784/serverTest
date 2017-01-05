@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Controller
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/images")
@@ -33,7 +30,6 @@ public class ImageController extends BaseController<Image> {
 
         SimpleModel simpleModel = new SimpleModel();
         simpleModel.setId(image.getId());
-        simpleModel.setName("ttteeesssttt");
 
         return new ResponseEntity<SimpleModel>(simpleModel, HttpStatus.OK);
     }
