@@ -1,14 +1,15 @@
-package com.kyrakova.diploma.models.role;
+package com.kyrakova.diploma.models.image;
 
 import com.kyrakova.diploma.models.BaseModel;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Roles")
-public class Role extends BaseModel implements Serializable {
+@Table(name = "Images")
+public class Image extends BaseModel implements Serializable {
     private String name;
-    private String options;
+    private byte[] image;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,11 @@ public class Role extends BaseModel implements Serializable {
         this.name = name;
     }
 
-    public String getOptions() {
-        return options;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setOptions(String options) {
-        this.options = options;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

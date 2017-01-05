@@ -20,7 +20,7 @@ public class User extends BaseModel implements Serializable {
     @Override
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

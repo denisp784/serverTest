@@ -16,7 +16,7 @@ public class CategoryProperty extends BaseModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

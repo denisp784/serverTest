@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kyrakova.diploma.models.BaseModel;
 import com.kyrakova.diploma.models.category.Category;
 import com.kyrakova.diploma.models.category.CategoryDaoImpl;
+import com.kyrakova.diploma.models.image.Image;
+import com.kyrakova.diploma.models.image.ImageDaoImpl;
 import com.kyrakova.diploma.models.model.Model;
 import com.kyrakova.diploma.models.model.ModelDaoImpl;
 import com.kyrakova.diploma.models.modelProperty.CategoryProperty;
@@ -23,18 +25,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -47,6 +50,14 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         return viewResolver;
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowCredentials(true);
     }
      
     
@@ -61,12 +72,24 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
 
     	return dataSource;
     }
+
+    @Bean(name="multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+
+        //Set the maximum allowed size (in bytes) for each individual file.
+        resolver.setMaxUploadSizePerFile(5242880);//5MB
+
+        //You may also set other available properties.
+
+        return resolver;
+    }
     
     
     private Properties getHibernateProperties() {
     	Properties properties = new Properties();
     	properties.put("hibernate.show_sql", "true");
-    	properties.put("hibernate.hbm2ddl.auto", "update");
+    	properties.put("hibernate.hbm2ddl.auto", "create");
     	properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		properties.put("hibernate.id.new_generator_mappings", "false");
     	return properties;
@@ -85,6 +108,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     	sessionBuilder.addAnnotatedClasses(CategoryProperty.class);
     	sessionBuilder.addAnnotatedClasses(Model.class);
     	sessionBuilder.addAnnotatedClasses(ModelPropertyValue.class);
+    	sessionBuilder.addAnnotatedClasses(Image.class);
     	return sessionBuilder.buildSessionFactory();
     }
     
@@ -144,6 +168,12 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "modelDao")
     public ModelDaoImpl getModelDao(SessionFactory sessionFactory) {
         return new ModelDaoImpl(sessionFactory);
+    }
+
+    @Autowired
+    @Bean(name = "imageDao")
+    public ImageDaoImpl getImageDao(SessionFactory sessionFactory) {
+        return new ImageDaoImpl(sessionFactory);
     }
 
     @Autowired

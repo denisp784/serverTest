@@ -5,11 +5,12 @@ import com.kyrakova.diploma.models.BaseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
 import java.util.List;
 
 public class BaseController<T extends BaseModel> {
@@ -20,11 +21,20 @@ public class BaseController<T extends BaseModel> {
         this.objDao = objDao;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<T> add(@RequestBody T obj) throws Exception {
         objDao.saveOrUpdate(obj);
         return new ResponseEntity<T>(obj, HttpStatus.OK);
     }
+
+    /*@RequestMapping(value = "/test", method = RequestMethod.POST)
+    public ResponseEntity<String> add(@RequestParam("image") MultipartFile file, @RequestBody T obj) {
+        // objDao.saveOrUpdate(obj);
+        System.out.println(obj);
+        System.out.println(file.getOriginalFilename());
+
+        return new ResponseEntity<String>(file.getOriginalFilename(), HttpStatus.OK);
+    }*/
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseEntity<T> update(@RequestBody T obj) {
@@ -38,7 +48,7 @@ public class BaseController<T extends BaseModel> {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ResponseEntity delete(@PathVariable("id") int id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         objDao.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }
