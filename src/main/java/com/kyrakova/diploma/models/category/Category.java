@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Category  extends BaseModel implements Serializable {
     @Column(name = "categoryName")
     private String categoryName;
-    private Image image;
+    private Long imageId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +28,11 @@ public class Category  extends BaseModel implements Serializable {
         this.categoryName = categoryName;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "image")
-    public Image getImage() {
-        return image;
+    public Long getImageId() {
+        return imageId;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 }

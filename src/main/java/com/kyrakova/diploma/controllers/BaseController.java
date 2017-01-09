@@ -40,8 +40,8 @@ public class BaseController<T extends BaseModel> {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    public ResponseEntity<List<T>> delete(@PathVariable("id") Long id) {
         objDao.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<List<T>>(objDao.list(), HttpStatus.OK);
     }
 }
