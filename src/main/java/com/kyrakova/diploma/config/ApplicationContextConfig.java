@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kyrakova.diploma.models.BaseModel;
 import com.kyrakova.diploma.models.category.Category;
 import com.kyrakova.diploma.models.category.CategoryDaoImpl;
+import com.kyrakova.diploma.models.categoryGroup.CategoryGroup;
+import com.kyrakova.diploma.models.categoryGroup.CategoryGroupDaoImpl;
 import com.kyrakova.diploma.models.image.Image;
 import com.kyrakova.diploma.models.image.ImageDaoImpl;
 import com.kyrakova.diploma.models.model.Model;
@@ -17,6 +19,8 @@ import com.kyrakova.diploma.models.property.Property;
 import com.kyrakova.diploma.models.property.PropertyDaoImpl;
 import com.kyrakova.diploma.models.role.Role;
 import com.kyrakova.diploma.models.role.RoleDaoImpl;
+import com.kyrakova.diploma.models.section.Section;
+import com.kyrakova.diploma.models.section.SectionDaoImpl;
 import com.kyrakova.diploma.models.user.User;
 import com.kyrakova.diploma.models.user.UserDaoImpl;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -25,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -39,7 +42,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -106,6 +108,8 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     	sessionBuilder.addAnnotatedClasses(Model.class);
     	sessionBuilder.addAnnotatedClasses(ModelPropertyValue.class);
     	sessionBuilder.addAnnotatedClasses(Image.class);
+    	sessionBuilder.addAnnotatedClasses(Section.class);
+    	sessionBuilder.addAnnotatedClasses(CategoryGroup.class);
     	return sessionBuilder.buildSessionFactory();
     }
     
@@ -177,5 +181,17 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     @Bean(name = "modelPropertyValueDao")
     public ModelPropertyValueDaoImpl getModelPropertyValueDao(SessionFactory sessionFactory) {
         return new ModelPropertyValueDaoImpl(sessionFactory);
+    }
+
+    @Autowired
+    @Bean(name = "sectionDao")
+    public SectionDaoImpl getSectionDao(SessionFactory sessionFactory) {
+        return new SectionDaoImpl(sessionFactory);
+    }
+
+    @Autowired
+    @Bean(name = "categoryGroupDao")
+    public CategoryGroupDaoImpl getCategoryGroupDao(SessionFactory sessionFactory) {
+        return new CategoryGroupDaoImpl(sessionFactory);
     }
 }
