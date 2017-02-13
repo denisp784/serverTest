@@ -25,7 +25,7 @@ public class CategoryController extends BaseController<Category> {
     }
 
     @RequestMapping(value = "/getBySection", method = RequestMethod.GET)
-    public ResponseEntity<List<Category>> getBySection(@RequestParam(value ="sectionId") Long id) {
+    public ResponseEntity<List<Category>> getBySection(@RequestParam(value = "sectionId") Long id) {
         return new ResponseEntity<List<Category>>(categoryDao.getBySection(id), HttpStatus.OK);
     }
 
