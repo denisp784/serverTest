@@ -23,7 +23,6 @@ public class BaseController<T extends BaseModel> {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<T> add(@RequestBody T obj) throws Exception {
-        System.out.println(obj);
         objDao.saveOrUpdate(obj);
         return new ResponseEntity<T>(obj, HttpStatus.OK);
     }
@@ -36,6 +35,7 @@ public class BaseController<T extends BaseModel> {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<List<T>> get() {
+        System.out.println(objDao.list().size());
         return new ResponseEntity<List<T>>(objDao.list(), HttpStatus.OK);
     }
 

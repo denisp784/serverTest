@@ -29,6 +29,15 @@ public class CategoryController extends BaseController<Category> {
         return new ResponseEntity<List<Category>>(categoryDao.getBySection(id), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseEntity<Category> add(@RequestBody Category category) throws Exception {
+
+        category.setCategoryGroup(categoryDao.getCategoryGroup(category.getCategoryGroup().getId()));
+        categoryDao.saveOrUpdate(category);
+
+        return new ResponseEntity<Category>(category, HttpStatus.OK);
+    }
+
     /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Gro>> delete(@PathVariable("id") Long id) {
         Long categoryGroupId = categoryDao.get(id).getCategoryGroup().getId();
