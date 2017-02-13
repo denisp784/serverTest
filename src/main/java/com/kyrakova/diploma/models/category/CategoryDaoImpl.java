@@ -23,8 +23,8 @@ public class CategoryDaoImpl extends BaseDao<Category> {
     }
 
     @Transactional
-    public List<Category> getBySection(Long id) {
-        String hql = "from Category where sectionId = " + id;
+    public List<Category> getByCategoryGroup(Long id) {
+        String hql = "from Category where categoryGroupId = " + id;
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
         return query.list();
