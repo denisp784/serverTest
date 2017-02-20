@@ -30,7 +30,7 @@ public class BaseDao<T extends BaseModel> {
         List<T> listObjs = (List<T>) sessionFactory.getCurrentSession()
                 .createCriteria(this.typeParameterClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.desc("id"))
+                .addOrder(Order.asc("id"))
                 .list();
 
         return listObjs;
