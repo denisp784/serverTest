@@ -2,15 +2,9 @@ package com.kyrakova.diploma.controllers;
 
 import com.kyrakova.diploma.models.BaseDao;
 import com.kyrakova.diploma.models.BaseModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Iterator;
 import java.util.List;
 
 public class BaseController<T extends BaseModel> {
@@ -37,6 +31,12 @@ public class BaseController<T extends BaseModel> {
     public ResponseEntity<List<T>> get() {
         System.out.println(objDao.list().size());
         return new ResponseEntity<List<T>>(objDao.list(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public ResponseEntity<T> getById(@PathVariable("id") Long id) {
+        System.out.println(objDao.list().size());
+        return new ResponseEntity<T>(objDao.get(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

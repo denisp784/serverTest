@@ -36,7 +36,7 @@ public class ImageController extends BaseController<Image> {
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<byte[]> getImageById(@PathVariable("id") Long id) {
         Image image = objDao.get(id);
         return new ResponseEntity<byte[]>(image.getImage(), HttpStatus.OK);
     }
