@@ -37,9 +37,15 @@ public class CategoryController extends BaseController<Category> {
     }
 
     @RequestMapping(value = "/getByCategoryGroup", method = RequestMethod.GET)
-    @ApiOperation(value="Категории по ID группы.")
+    @ApiOperation(value = "Категории по ID группы.")
     public ResponseEntity<List<Category>> getBySection(@RequestParam(value = "categoryGroupId") Long id) {
         return new ResponseEntity<List<Category>>(categoryDao.getByCategoryGroup(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getByUrl", method = RequestMethod.GET)
+    @ApiOperation(value = "Категория по urlName.")
+    public ResponseEntity<Category> getByUrl(@RequestParam(value = "url") String url) {
+        return new ResponseEntity<Category>(categoryDao.getByUrl(url), HttpStatus.OK);
     }
 
     /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

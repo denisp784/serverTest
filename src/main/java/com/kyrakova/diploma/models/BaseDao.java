@@ -3,6 +3,7 @@ package com.kyrakova.diploma.models;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +29,9 @@ public class BaseDao<T extends BaseModel> {
         @SuppressWarnings("unchecked")
         List<T> listObjs = (List<T>) sessionFactory.getCurrentSession()
                 .createCriteria(this.typeParameterClass)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                .addOrder(Order.desc("id"))
+                .list();
 
         return listObjs;
     }

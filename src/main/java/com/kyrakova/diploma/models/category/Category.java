@@ -22,6 +22,8 @@ public class Category  extends BaseModel implements Serializable {
 
     private CategoryGroup categoryGroup;
 
+    private String urlName;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -54,5 +56,13 @@ public class Category  extends BaseModel implements Serializable {
 
     public void setCategoryGroup(CategoryGroup categoryGroup) {
         this.categoryGroup = categoryGroup;
+    }
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
     }
 }

@@ -29,7 +29,6 @@ public class BaseController<T extends BaseModel> {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<List<T>> get() {
-        System.out.println(objDao.list().size());
         return new ResponseEntity<List<T>>(objDao.list(), HttpStatus.OK);
     }
 

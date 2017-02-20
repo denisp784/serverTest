@@ -42,4 +42,17 @@ public class CategoryDaoImpl extends BaseDao<Category> {
 
         return null;
     }
+
+    @Transactional
+    public Category getByUrl(String url) {
+        String hql = "from Category where urlName = " + url;
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<Category> list = (List<Category>) query.list();
+
+        if (list != null && !list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
 }
