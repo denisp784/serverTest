@@ -24,6 +24,8 @@ public class Category  extends BaseModel implements Serializable {
 
     private String urlName;
 
+    private Long priority;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -64,5 +66,13 @@ public class Category  extends BaseModel implements Serializable {
 
     public void setUrlName(String urlName) {
         this.urlName = urlName;
+    }
+
+    public Long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Long priority) {
+        this.priority = priority;
     }
 }

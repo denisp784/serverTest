@@ -24,6 +24,8 @@ public class CategoryGroup extends BaseModel implements Serializable {
 
     private List<Category> categories = new ArrayList<Category>(0);
 
+    private Long priority;
+
     public CategoryGroup() {
     }
 
@@ -63,5 +65,13 @@ public class CategoryGroup extends BaseModel implements Serializable {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Long priority) {
+        this.priority = priority;
     }
 }

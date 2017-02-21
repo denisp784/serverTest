@@ -21,6 +21,8 @@ public class Section extends BaseModel implements Serializable {
         return id;
     }
 
+    private Long priority;
+
     public String getSectionName() {
         return sectionName;
     }
@@ -35,5 +37,13 @@ public class Section extends BaseModel implements Serializable {
 
     public void setImageId(Long imageId) {
         this.imageId = imageId;
+    }
+
+    public Long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Long priority) {
+        this.priority = priority;
     }
 }
