@@ -27,10 +27,10 @@ public class CategoryDaoImpl extends BaseDao<Category> {
     @Transactional
     public List<Category> list() {
         @SuppressWarnings("unchecked")
-        List<Category> listObjs = (List<Category>) sessionFactory.getCurrentSession()
-                .createCriteria(Category.class)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.asc("priority"))
+        String hql = "from Category C order by C.priority ASC, C.id ASC";
+        List<Category> listObjs = (List<Category>) sessionFactory
+                .getCurrentSession()
+                .createQuery(hql)
                 .list();
 
         return listObjs;
@@ -38,7 +38,7 @@ public class CategoryDaoImpl extends BaseDao<Category> {
 
     @Transactional
     public List<Category> getByCategoryGroup(Long id) {
-        String hql = "from Category where categoryGroupId = " + id;
+        String hql = "from Category C where categoryGroupId = " + id + " order by C.priority ASC, C.id ASC";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
         return query.list();
@@ -46,7 +46,7 @@ public class CategoryDaoImpl extends BaseDao<Category> {
 
     @Transactional
     public CategoryGroup getCategoryGroup(Long categoryGroupId) {
-        String hql = "from CategoryGroup where id = " + categoryGroupId;
+        String hql = "from CategoryGroup CC where id = " + categoryGroupId + " order by CC.priority ASC, CC.id ASC";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
         List<CategoryGroup> list = (List<CategoryGroup>) query.list();
 

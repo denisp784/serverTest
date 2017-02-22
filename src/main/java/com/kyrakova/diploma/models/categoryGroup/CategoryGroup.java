@@ -58,7 +58,8 @@ public class CategoryGroup extends BaseModel implements Serializable {
     }
 
     @JsonProperty(access = READ_ONLY)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "categoryGroup")
+    @OrderBy("priority, id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "categoryGroupId")
     public List<Category> getCategories() {
         return categories;
     }

@@ -30,7 +30,6 @@ public class CategoryController extends BaseController<Category> {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Category> add(@RequestBody Category category) throws Exception {
 
-        category.setCategoryGroup(categoryDao.getCategoryGroup(category.getCategoryGroup().getId()));
         categoryDao.saveOrUpdate(category);
 
         return new ResponseEntity<Category>(category, HttpStatus.OK);

@@ -27,18 +27,16 @@ public class CategoryGroupDaoImpl extends BaseDao<CategoryGroup> {
     @org.springframework.transaction.annotation.Transactional
     public List<CategoryGroup> list() {
         @SuppressWarnings("unchecked")
-        List<CategoryGroup> listObjs = (List<CategoryGroup>) sessionFactory.getCurrentSession()
-                .createCriteria(CategoryGroup.class)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.asc("priority"))
-                .list();
+        String hql = "from CategoryGroup CC order by CC.priority ASC, CC.id ASC";
+        Query query = sessionFactory.getCurrentSession().createQuery(hql);
+        List<CategoryGroup> list = (List<CategoryGroup>) query.list();
 
-        return listObjs;
+        return list;
     }
 
     @Transactional
     public List<CategoryGroup> getBySection(Long id) {
-        String hql = "from CategoryGroup where sectionId = " + id;
+        String hql = "from CategoryGroup CC where sectionId = " + id + " order by CC.priority ASC, CC.id ASC";
         Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
         return query.list();

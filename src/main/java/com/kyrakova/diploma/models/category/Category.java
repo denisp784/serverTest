@@ -1,15 +1,9 @@
 package com.kyrakova.diploma.models.category;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kyrakova.diploma.models.BaseModel;
-import com.kyrakova.diploma.models.categoryGroup.CategoryGroup;
-import com.kyrakova.diploma.models.image.Image;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
 @Entity
 @Table(name = "Categories")
@@ -20,11 +14,11 @@ public class Category  extends BaseModel implements Serializable {
     @Column(name = "imageId",nullable = false)
     private Long imageId;
 
-    private CategoryGroup categoryGroup;
-
     private String urlName;
 
     private Long priority;
+
+    private Long categoryGroupId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,17 +43,6 @@ public class Category  extends BaseModel implements Serializable {
         this.imageId = imageId;
     }
 
-    @JsonProperty(access = WRITE_ONLY)
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "categoryGroupId", nullable = false)
-    public CategoryGroup getCategoryGroup() {
-        return categoryGroup;
-    }
-
-    public void setCategoryGroup(CategoryGroup categoryGroup) {
-        this.categoryGroup = categoryGroup;
-    }
-
     public String getUrlName() {
         return urlName;
     }
@@ -74,5 +57,14 @@ public class Category  extends BaseModel implements Serializable {
 
     public void setPriority(Long priority) {
         this.priority = priority;
+    }
+
+    @JoinColumn(name = "categoryGroupId", nullable = false)
+    public Long getCategoryGroupId() {
+        return categoryGroupId;
+    }
+
+    public void setCategoryGroupId(Long categoryGroupId) {
+        this.categoryGroupId = categoryGroupId;
     }
 }

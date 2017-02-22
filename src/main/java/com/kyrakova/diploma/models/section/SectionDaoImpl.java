@@ -21,10 +21,9 @@ public class SectionDaoImpl extends BaseDao<Section> {
     @org.springframework.transaction.annotation.Transactional
     public List<Section> list() {
         @SuppressWarnings("unchecked")
-        List<Section> listObjs = (List<Section>) sessionFactory.getCurrentSession()
-                .createCriteria(Section.class)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.asc("priority"))
+        List<Section> listObjs = (List<Section>) sessionFactory
+                .getCurrentSession()
+                .createQuery("from Section S order by S.priority ASC, S.id ASC ")
                 .list();
 
         return listObjs;
