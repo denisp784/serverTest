@@ -1,4 +1,4 @@
-package com.kyrakova.diploma.models.modelProperty;
+package com.kyrakova.diploma.models.categoryProperty;
 
 import com.kyrakova.diploma.models.BaseModel;
 import com.kyrakova.diploma.models.category.Category;
@@ -20,6 +20,8 @@ public class CategoryProperty extends BaseModel implements Serializable {
         return id;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "category")
     public Category getCategory() {
         return category;
     }
@@ -28,6 +30,8 @@ public class CategoryProperty extends BaseModel implements Serializable {
         this.category = category;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "property")
     public Property getProperty() {
         return property;
     }

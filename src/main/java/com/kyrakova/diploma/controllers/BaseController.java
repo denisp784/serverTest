@@ -18,7 +18,8 @@ public class BaseController<T extends BaseModel> {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<T> add(@RequestBody T obj) throws Exception {
         objDao.saveOrUpdate(obj);
-        return new ResponseEntity<T>(obj, HttpStatus.OK);
+        T newObject = objDao.get(obj.getId());
+        return new ResponseEntity<T>(newObject, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

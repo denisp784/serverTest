@@ -2,7 +2,7 @@ package com.kyrakova.diploma.models.modelPropertyValue;
 
 import com.kyrakova.diploma.models.BaseModel;
 import com.kyrakova.diploma.models.model.Model;
-import com.kyrakova.diploma.models.modelProperty.CategoryProperty;
+import com.kyrakova.diploma.models.categoryProperty.CategoryProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;

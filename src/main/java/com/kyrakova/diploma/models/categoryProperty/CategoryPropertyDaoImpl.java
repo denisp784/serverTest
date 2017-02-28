@@ -1,4 +1,4 @@
-package com.kyrakova.diploma.models.modelProperty;
+package com.kyrakova.diploma.models.categoryProperty;
 
 import com.kyrakova.diploma.models.BaseDao;
 import org.hibernate.SessionFactory;
